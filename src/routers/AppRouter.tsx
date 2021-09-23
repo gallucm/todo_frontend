@@ -41,9 +41,9 @@ export const AppRouter = () => {
                     <PrivateRoute exact path="/new" isAuthenticated={user} component={NewScreen}></PrivateRoute>
                     <PrivateRoute exact path="/edit/:id" isAuthenticated={user} component={EditScreen}></PrivateRoute>
                     <PrivateRoute exact path="/profile" isAuthenticated={user} component={ProfileScreen}></PrivateRoute>
-                    <PrivateRoute exact path="/" isAuthenticated={user} component={HomeScreen}></PrivateRoute>
+                    <PrivateRoute exact path="/home" isAuthenticated={user} component={HomeScreen}></PrivateRoute>
 
-                    <Redirect to="/" />
+                    <Redirect to="/home" />
                 </Switch>
             </div>
         </Router>

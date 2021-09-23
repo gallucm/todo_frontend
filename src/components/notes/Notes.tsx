@@ -1,21 +1,13 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { startRemoveAllSelected } from "../../actions/Note";
+import { useSelector } from "react-redux";
 import { useNotes } from "../../hooks/useNotes";
 import { RootState } from "../../store/store";
 import { AlertError } from "../ui/AlertError";
 import { NoteContent } from "./NoteContent";
 
 export const Notes = () => {
-    const dispatch = useDispatch();
-
     useNotes();
 
     const { notes } = useSelector((state: RootState) => state.note);
-
-    useEffect(() => {
-        dispatch(startRemoveAllSelected());
-    }, [dispatch]);
 
     return (
         <>

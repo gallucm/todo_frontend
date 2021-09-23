@@ -9,8 +9,7 @@ export const login = async (user: UserLogin): Promise<any> => {
         const response = await axios.post(`api/user/auth`, {email, password});
         return response.data;
     } catch (err: any){
-        // throw err.response.data;
-        console.log(err.response.data);
+        throw err.response.data;
     }
 }  
 //Test;

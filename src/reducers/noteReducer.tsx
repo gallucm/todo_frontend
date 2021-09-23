@@ -3,7 +3,8 @@ import { NoteAction } from "../types/Note";
 
 const initialState: NoteState = {
     notes: [],
-    selected: []
+    selected: [],
+    createOrUpdate: false
 }
 
 export const noteReducer = (state: NoteState = initialState, action: NoteAction): NoteState => {
@@ -45,6 +46,18 @@ export const noteReducer = (state: NoteState = initialState, action: NoteAction)
             return {
                 ...state,
                 selected: []
+            }
+
+        case 'NOTE_CREATE_OR_UPDATE':
+            return {
+                ...state,
+                createOrUpdate: true
+            }
+
+        case 'NOTE_CREATE_OR_UPDATE_RESET':
+            return {
+                ...state,
+                createOrUpdate: false
             }
         default:
             return state;

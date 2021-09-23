@@ -10,7 +10,7 @@ export const NoteContent = ({note}:any) => {
         if (e.target.checked)
             dispatch(startNoteSelected(note));
         else
-            dispatch(startRemoveNoteSelected(note.id));
+            dispatch(startRemoveNoteSelected(note._id));
     }
 
     return (

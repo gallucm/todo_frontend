@@ -12,7 +12,7 @@ export const startLogin = (userLogin: UserLogin) => {
             dispatch(setLogin(user));
             setSession(token);
         } catch (error: any) {
-            if (error.code === 400)
+            if (error.code === 403)
                 dispatch(setError('Usuario o contraseña incorrecta'));
             else
                 dispatch(setError('Error al iniciar sesión'));
