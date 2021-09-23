@@ -163,13 +163,15 @@
     text-align: center;
     position: relative;
 
+
     .content-auth{
         background: white;
         height: auto;
         border-radius: 1em;
-        width: 19em;
+        width: auto;
+        max-width: 20em;
         margin: auto;
-        margin-top: 5em;
+        margin-top: 2em;
         padding: 2em;
 
         .logo-auth{
