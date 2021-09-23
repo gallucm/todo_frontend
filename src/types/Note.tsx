@@ -1,10 +1,10 @@
-import { Note } from "../interfaces/Note";
+import { IUpdateNote, Note } from "../interfaces/Note";
 
 export type NoteAction = 
     | { type: 'NOTE_ADD'; payload: Note }
     | { type: 'NOTE_GET_ALL'; payload: Note[]}
     | { type: 'NOTE_REMOVE'; payload: string }
-    | { type: 'NOTE_UPDATE'; payload: Note }
+    | { type: 'NOTE_UPDATE'; payload: IUpdateNote }
     | { type: 'NOTE_ADD_SELECTED'; payload: Note }
     | { type: 'NOTE_REMOVE_SELECTED'; payload: string }
     | { type: 'NOTE_REMOVE_ALL_SELECTED'}

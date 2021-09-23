@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 import { startSaveNote, startUpdateNote } from "../../actions/Note";
-import { Note } from "../../interfaces/Note";
 import { RootState } from "../../store/store";
 import { AlertError } from "../ui/AlertError";
 
@@ -13,48 +12,18 @@ export const New = ({ edit = false }) => {
 
     const { selected, createOrUpdate } = useSelector((state: RootState) => state.note);
     const { user } = useSelector((state: RootState) => state.auth);
-    const { loading, message } = useSelector((state: RootState) => state.ui);
 
     const [title, setTitle] = useState(edit && selected[0]  ? selected[0].title : '');
     const [content, setContent] = useState(edit && selected[0] ? selected[0].content : '');
 
-    useEffect(() => {
-        if (!loading && !message && !edit) {
-            setTitle('');
-            setContent('');
-        }
-    }, [edit, loading, message]);
-
-    const createNote = (): Note => {
-        return {
-            _id: null,
-            title,
-            content,
-            createdAt: new Date(),
-            updatedAt: null,
-            done: false
-        }
-    }
-
-    const updateNote = (): Note => {
-        return {
-            _id: selected[0]._id,
-            title,
-            content,
-            createdAt: selected[0].createdAt,
-            updatedAt: new Date(),
-            done: selected[0].done
-        }
-    }
-
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        dispatch(startSaveNote(createNote(), (user ? user.id : '')));
+        dispatch(startSaveNote({title, content}, (user ? user.id : '')));
     }
 
     const handleUpdate = (e: any) => {
         e.preventDefault();
-        dispatch(startUpdateNote(updateNote()));
+        dispatch(startUpdateNote({_id: selected[0]._id + '', title, content, updatedAt: null}));
     }
 
     if (createOrUpdate) {

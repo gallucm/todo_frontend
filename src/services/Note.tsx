@@ -1,10 +1,10 @@
 
-import { Note } from "../interfaces/Note";
+import { ICreateNote, IUpdateNote } from "../interfaces/Note";
 
 const axios = require('axios');
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_BACKEND;
 
-export const addNote = async (token: string, note: Note, user: string): Promise<any> => {
+export const addNote = async (token: string, note: ICreateNote, user: string): Promise<any> => {
     const { title, content } = note;
     try{
         const response = await axios.post(`api/note`, {title, content, user}, {headers: {'x-token': token}});
@@ -14,7 +14,7 @@ export const addNote = async (token: string, note: Note, user: string): Promise<
     }
 }
 
-export const updateNote = async (token: string, note: Note): Promise<any> => {
+export const updateNote = async (token: string, note: IUpdateNote): Promise<any> => {
     const { _id, title, content } = note;
     try{
         const response = await axios.put(`api/note/${_id}`, {title, content}, {headers: {'x-token': token}});

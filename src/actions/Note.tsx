@@ -1,9 +1,9 @@
-import { Note } from "../interfaces/Note";
+import { ICreateNote, IUpdateNote, Note } from "../interfaces/Note";
 import { addNote, deleteNote, getAllNotes, updateNote } from "../services/Note";
 import { setError, startLoading, stopLoading } from "./Ui";
 
 
-export const startSaveNote = (note: Note, userId: string) => {
+export const startSaveNote = (note: ICreateNote, userId: string) => {
     return async (dispatch: any) => {
         try {
             dispatch(startLoading());
@@ -18,12 +18,16 @@ export const startSaveNote = (note: Note, userId: string) => {
     }
 }
 
-export const startUpdateNote = (note: Note) => {
+export const startUpdateNote = (note: IUpdateNote) => {
     return async (dispatch: any) => {
         try {
             dispatch(startLoading());
+
             const token = getToken();
-            await updateNote(token, note);
+
+            const { updatedAt } = await updateNote(token, note);
+            note.updatedAt = updatedAt;
+            
             dispatch(update(note));
             dispatch(createOrUpdate());
         } catch (error) {
@@ -102,7 +106,7 @@ const deletetNotes = async (dispatch: any, token: string, notes: Note[]) => {
     }
 }
 
-const update = (payload: Note) => ({
+const update = (payload: IUpdateNote) => ({
     type: 'NOTE_UPDATE',
     payload
 });

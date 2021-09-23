@@ -39,9 +39,20 @@ export const noteReducer = (state: NoteState = initialState, action: NoteAction)
         case 'NOTE_UPDATE':
             return {
                 ...state,
-                notes: state.notes.map(note => note._id === action.payload._id ? action.payload : note)
-            }
+                notes: state.notes.map(note => {
+                    if (note._id === action.payload._id) {
+                        return {
+                            ...note,
+                            title: action.payload.title,
+                            content: action.payload.content,
+                            updatedAt: action.payload.updatedAt
 
+                        }
+                    } else {
+                        return note
+                    }
+                })
+            }
         case 'NOTE_REMOVE_ALL_SELECTED':
             return {
                 ...state,
