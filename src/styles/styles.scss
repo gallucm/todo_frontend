@@ -1,0 +1,246 @@
+// Variables
+@import './colors';
+
+// General
+.container{
+    background: $colorApp !important;
+    height: 100vh;
+    padding-bottom: 2em;
+    padding-top: 2em;
+}
+
+// Boton general
+.btn-app{
+    border: 1px solid $colorText;
+    color: $colorText;
+    
+    margin: .5em;
+    width: 70px;
+
+    transition: all 0.2s ease;
+
+    &:hover{
+        color: $colorApp;
+        background: $colorText;
+    }
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+// Links
+.link{
+    color: $colorApp;
+    text-decoration: none;
+    a{
+        text-decoration: none;
+        color: $colorApp;
+        font-weight: 600;
+    }
+
+    &:hover{
+        color: $colorApp;
+    }
+}
+
+// Boton login & Register
+.btn-auth{
+    background: white;
+    border: 1px solid $colorApp;
+    color: $colorApp;
+    
+    margin: .5em;
+
+    transition: all 0.2s ease;
+
+    &:hover{
+        color: white;
+        background: $colorApp;
+    }
+}
+
+// Inputs genericos
+.input-generic{
+    margin: auto;
+    margin-bottom: 1em;
+
+    &:focus{
+        border: 2px solid $colorApp;
+    }
+}
+
+// Inputs notes
+.input-notes{
+    width: 18em;
+    margin: auto;
+    margin-bottom: 1em;
+
+    &:focus{
+        border: 2px solid $colorApp;
+    }
+}
+
+.note-content{
+    height: 8em;
+    resize: none;
+}
+
+.alert-success{
+    width: 20em;
+    margin: auto;
+}
+
+.alert-todo{
+    width: 19em;
+    margin: auto;
+}
+
+// Logo
+#logo{
+    background: $colorText;
+    border-radius: 5px;
+    padding: .5em;
+    text-align: center;
+    text-decoration-line: none;
+
+    h1{
+        color: $colorApp;
+    }
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+
+
+
+// Navbar
+#navbar{
+    border-bottom: 2px solid $colorText;
+    display: flex;
+    margin: auto;
+    height: auto;
+    width: 90%;
+    padding: 1em;
+
+    // Profile
+    .profile-pic{
+        border-radius: 50%;   
+        height: 50px;
+        margin-left: 1em;
+        vertical-align: middle;
+        width: 50px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    
+    
+    #navbar-links{
+        margin-left: auto;
+    
+        & span{
+            color: $colorText;
+            font-size: large;
+            font-weight: 700;
+            line-height: 3.5em;
+        }
+    }
+}
+
+// Content
+#content{
+    height: 100%;
+    overflow-y: scroll;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5em;
+    text-align: center;
+    position: relative;
+
+    .content-auth{
+        background: white;
+        height: auto;
+        border-radius: 1em;
+        width: 19em;
+        margin: auto;
+        margin-top: 5em;
+        padding: 2em;
+
+        .logo-auth{
+            background: $colorApp;
+            border-radius: 5px;
+            padding: .5em;
+            text-align: center;
+            margin-bottom: 1em;
+        
+            h1{
+                color: white;
+            }
+        
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+
+    #content-new-note{
+        margin-top: 1em;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    #notes{
+        height: auto;
+        max-height: 400px;
+
+        .note{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            height: 7em;
+            overflow-y: scroll;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1.5em;
+            border-bottom: .5px solid $colorText;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .note-content{
+                flex: 1 1 auto;
+
+                h3{
+                    margin-top: .5em;
+                    color: $colorText;
+                }
+
+                span{
+                    color: white;
+                }
+            }
+
+            .note-button{
+                margin-left: 2em;
+            }
+        }
+    }
+
+    .buttons{
+        border: 1px solid red !important;
+        color: red;
+        position: relative;
+        bottom:0;
+    }
+
+}

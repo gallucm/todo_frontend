@@ -1,0 +1,137 @@
+import { Note } from "../interfaces/Note";
+import { addNote, deleteNote, getAllNotes, updateNote } from "../services/Note";
+import { setError, setMessage, startLoading, stopLoading } from "./Ui";
+
+
+export const startSaveNote = (note: Note, userId: string) => {
+    return async (dispatch: any) => {
+        try{
+            dispatch(startLoading());
+            const token = getToken();
+            await addNote(token, note, userId);
+            dispatch(setMessage('Nota creada correctamente'));
+        } catch (error){
+            console.log(error);
+            dispatch(setError('Error al crear la nota'));
+        } finally {
+            dispatch(stopLoading());
+        }
+    }
+}
+
+export const startUpdateNote = (note: Note) => {
+    return async (dispatch: any) => {
+        try{
+            dispatch(startLoading());
+            const token = getToken();
+            await updateNote(token, note);
+            dispatch(setMessage('Nota actualizada correctamente'));
+        } catch(error){
+            console.log(error);
+            dispatch(setError('Error al actualizar la nota'));
+        } finally {
+            dispatch(stopLoading());
+        }
+    }
+}
+
+export const startGetNotes = (userId: string) => {
+    return async (dispatch: any) => {
+        try{
+            dispatch(startLoading());
+            const token = getToken();
+            const notes = await getAllNotes(token, userId);
+            dispatch(getAll(notes));
+        } catch (error: any){
+            if (error.code !== 404){
+                dispatch(setError('Error al obtener las notas'));
+            }
+        } finally {
+            dispatch(stopLoading());
+        }
+    }
+}
+
+export const startNoteSelected = (note: Note) => {
+    return async (dispatch: any) => {
+        dispatch(startLoading());
+
+        dispatch(addSelected(note));
+
+        dispatch(stopLoading());
+    }
+}
+
+export const startRemoveNoteSelected = (noteId: string) => {
+    return async (dispatch: any) => {
+        dispatch(startLoading());
+
+        dispatch(removeSelected(noteId));
+
+        dispatch(stopLoading());
+    }
+}
+
+export const startDeleteNote = (notes: Note[]) => {
+    return async (dispatch: any) => {
+        try{
+            dispatch(startLoading());
+            const token = getToken();
+            const noteId = notes[0]._id;
+            await deleteNote(token, noteId + '');
+            dispatch(setDeleteNote(noteId + ''));
+            dispatch(removeAllSelected());
+        } catch (error){
+            dispatch(setError('Error al eliminar la nota'));
+        } finally {
+            dispatch(stopLoading());
+        }
+    }
+}
+
+export const startRemoveAllSelected = () => {
+    return async (dispatch: any) => {
+        dispatch(startLoading());
+
+        dispatch(removeAllSelected());
+
+        dispatch(stopLoading());
+    }
+}
+
+// const update = (payload: Note) => ({
+//     type: 'NOTE_UPDATE',
+//     payload
+// });
+
+const getAll = (payload: Note[]) => ({
+    type: 'NOTE_GET_ALL',
+    payload
+});
+
+const addSelected = (payload: Note) => ({
+    type: 'NOTE_ADD_SELECTED',
+    payload
+});
+
+const removeSelected = (payload: string) => ({
+    type: 'NOTE_REMOVE_SELECTED',
+    payload
+});
+
+const removeAllSelected = () => ({
+    type: 'NOTE_REMOVE_ALL_SELECTED'
+});
+
+const setDeleteNote = (payload: string) => ({
+    type: 'NOTE_REMOVE',
+    payload
+});
+
+const getToken = () => {
+    const token = localStorage.getItem('identity');
+    if (token)
+        return token
+        
+    return '';
+ }
