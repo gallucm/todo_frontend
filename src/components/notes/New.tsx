@@ -5,7 +5,6 @@ import { Link, useHistory } from "react-router-dom";
 import { startSaveNote, startUpdateNote } from "../../actions/Note";
 import { Note } from "../../interfaces/Note";
 import { RootState } from "../../store/store";
-import { Alert } from "../ui/Alert";
 import { AlertError } from "../ui/AlertError";
 
 export const New = ({ edit = false }) => {
