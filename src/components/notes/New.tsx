@@ -12,12 +12,12 @@ export const New = ({ edit = false }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { selected } = useSelector((state: RootState) => state.note);
+    const { selected, createOrUpdate } = useSelector((state: RootState) => state.note);
     const { user } = useSelector((state: RootState) => state.auth);
     const { loading, message } = useSelector((state: RootState) => state.ui);
 
-    const [title, setTitle] = useState(edit && selected  ? selected[0].title : '');
-    const [content, setContent] = useState(edit && selected ? selected[0].content : '');
+    const [title, setTitle] = useState(edit && selected[0]  ? selected[0].title : '');
+    const [content, setContent] = useState(edit && selected[0] ? selected[0].content : '');
 
     useEffect(() => {
         if (!loading && !message && !edit) {
@@ -58,8 +58,8 @@ export const New = ({ edit = false }) => {
         dispatch(startUpdateNote(updateNote()));
     }
 
-    if (!selected) {
-        history.push('/');
+    if (createOrUpdate) {
+        history.push('/home');
     }
 
     return (
@@ -76,7 +76,6 @@ export const New = ({ edit = false }) => {
                         <i className="fas fa-undo-alt fa-2x"></i>
                     </Link>
                 </div>
-                <Alert />
                 <AlertError/>
             </form>
         </div>

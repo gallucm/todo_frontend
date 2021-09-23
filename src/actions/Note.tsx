@@ -1,17 +1,16 @@
 import { Note } from "../interfaces/Note";
 import { addNote, deleteNote, getAllNotes, updateNote } from "../services/Note";
-import { setError, setMessage, startLoading, stopLoading } from "./Ui";
+import { setError, startLoading, stopLoading } from "./Ui";
 
 
 export const startSaveNote = (note: Note, userId: string) => {
     return async (dispatch: any) => {
-        try{
+        try {
             dispatch(startLoading());
             const token = getToken();
             await addNote(token, note, userId);
-            dispatch(setMessage('Nota creada correctamente'));
-        } catch (error){
-            console.log(error);
+            dispatch(createOrUpdate());
+        } catch (error) {
             dispatch(setError('Error al crear la nota'));
         } finally {
             dispatch(stopLoading());
@@ -21,13 +20,13 @@ export const startSaveNote = (note: Note, userId: string) => {
 
 export const startUpdateNote = (note: Note) => {
     return async (dispatch: any) => {
-        try{
+        try {
             dispatch(startLoading());
             const token = getToken();
             await updateNote(token, note);
-            dispatch(setMessage('Nota actualizada correctamente'));
-        } catch(error){
-            console.log(error);
+            dispatch(update(note));
+            dispatch(createOrUpdate());
+        } catch (error) {
             dispatch(setError('Error al actualizar la nota'));
         } finally {
             dispatch(stopLoading());
@@ -37,13 +36,18 @@ export const startUpdateNote = (note: Note) => {
 
 export const startGetNotes = (userId: string) => {
     return async (dispatch: any) => {
-        try{
+        try {
             dispatch(startLoading());
+
+            dispatch(resetCreateOrUpdate());
+            
+            dispatch(removeAllSelected());
+
             const token = getToken();
             const notes = await getAllNotes(token, userId);
             dispatch(getAll(notes));
-        } catch (error: any){
-            if (error.code !== 404){
+        } catch (error: any) {
+            if (error.code !== 404) {
                 dispatch(setError('Error al obtener las notas'));
             }
         } finally {
@@ -74,14 +78,12 @@ export const startRemoveNoteSelected = (noteId: string) => {
 
 export const startDeleteNote = (notes: Note[]) => {
     return async (dispatch: any) => {
-        try{
+        try {
             dispatch(startLoading());
             const token = getToken();
-            const noteId = notes[0]._id;
-            await deleteNote(token, noteId + '');
-            dispatch(setDeleteNote(noteId + ''));
+            deletetNotes(dispatch, token, notes)
             dispatch(removeAllSelected());
-        } catch (error){
+        } catch (error) {
             dispatch(setError('Error al eliminar la nota'));
         } finally {
             dispatch(stopLoading());
@@ -89,20 +91,21 @@ export const startDeleteNote = (notes: Note[]) => {
     }
 }
 
-export const startRemoveAllSelected = () => {
-    return async (dispatch: any) => {
-        dispatch(startLoading());
-
-        dispatch(removeAllSelected());
-
-        dispatch(stopLoading());
+const deletetNotes = async (dispatch: any, token: string, notes: Note[]) => {
+    try{
+        for (let i = 0; i < notes.length; i++) {
+            await deleteNote(token, notes[i]._id + '');
+            dispatch(setDeleteNote(notes[i]._id + ''));
+        }  
+    } catch (error){
+        throw error;
     }
 }
 
-// const update = (payload: Note) => ({
-//     type: 'NOTE_UPDATE',
-//     payload
-// });
+const update = (payload: Note) => ({
+    type: 'NOTE_UPDATE',
+    payload
+});
 
 const getAll = (payload: Note[]) => ({
     type: 'NOTE_GET_ALL',
@@ -128,10 +131,18 @@ const setDeleteNote = (payload: string) => ({
     payload
 });
 
+const createOrUpdate = () => ({
+    type: 'NOTE_CREATE_OR_UPDATE'
+});
+
+const resetCreateOrUpdate = () => ({
+    type: 'NOTE_CREATE_OR_UPDATE_RESET'
+});
+
 const getToken = () => {
     const token = localStorage.getItem('identity');
     if (token)
         return token
-        
+
     return '';
- }
+}
