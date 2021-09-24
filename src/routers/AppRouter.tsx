@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Redirect
 } from "react-router-dom";
@@ -41,9 +41,9 @@ export const AppRouter = () => {
                     <PrivateRoute exact path="/new" isAuthenticated={user} component={NewScreen}></PrivateRoute>
                     <PrivateRoute exact path="/edit/:id" isAuthenticated={user} component={EditScreen}></PrivateRoute>
                     <PrivateRoute exact path="/profile" isAuthenticated={user} component={ProfileScreen}></PrivateRoute>
-                    <PrivateRoute exact path="/home" isAuthenticated={user} component={HomeScreen}></PrivateRoute>
+                    <PrivateRoute exact path="/" isAuthenticated={user} component={HomeScreen}></PrivateRoute>
 
-                    <Redirect to="/home" />
+                    <Redirect to="/" />
                 </Switch>
             </div>
         </Router>
