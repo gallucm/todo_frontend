@@ -23,5 +23,8 @@ npm install
 ```bash
 npm start
 ```
+# Extra
+Es necesario conectar este aplicación con el backend correspondiente. Lo puedes obtener [Aqui](https://github.com/gallucm/todo_backend.git)
+
 ## Vista Previa
 ![](/preview.png)
