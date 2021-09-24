@@ -1,26 +1,26 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory} from "react-router-dom";
-import { startDeleteNote } from "../../actions/Note";
+// import { startDeleteNote } from "../../actions/Note";
 import { RootState } from "../../store/store";
 
 export const HomeButtons = () => {
 
-    const history = useHistory();
+    // const history = useHistory();
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    const { selected } = useSelector((state: RootState) => state.note);
+    // const { selected } = useSelector((state: RootState) => state.note);
 
-    const handleDelete = () => {
-        if (selected && selected.length > 0)
-            dispatch(startDeleteNote(selected));
-    };
+    // const handleDelete = () => {
+    //     if (selected)
+    //         dispatch(startDeleteNote(selected));
+    // };
 
-    const handleEdit = () => {
-        if (selected && selected.length === 1)
-            history.push('/edit/' + selected[0]._id);
-    }
+    // const handleEdit = () => {
+    //     if (selected)
+    //         history.push('/edit/' + selected._id);
+    // }
 
 
     return (
@@ -29,19 +29,19 @@ export const HomeButtons = () => {
                 <Link to="/new" className="btn btn-app">
                     <i className="fas fa-plus"></i>
                 </Link>
-                {
-                    (selected && selected.length === 1) &&
+                {/* {
+                    (selected) &&
                     <button className="btn btn-app" title="Editar" onClick={handleEdit}>
                         <i className="fas fa-edit"></i>
                     </button>
-                }
-                {
+                } */}
+                {/* {
                     (selected && selected.length > 0) &&
 
                     <button className="btn btn-app" title="Eliminar" onClick={handleDelete}>
                         <i className="fas fa-trash"></i>
                     </button>
-                }
+                } */}
             </div>
         </>
     )

@@ -25,8 +25,30 @@
     }
 }
 
+.btn-select{
+    border: 1px solid $colorText;
+    color: $colorText;
+    
+    width: auto;
+
+    transition: all 0.2s ease;
+
+    &:hover{
+        color: $colorApp;
+        background: $colorText;
+    }
+}
+
 .pointer{
     cursor: pointer;
+}
+
+.blocked{
+    cursor: not-allowed;
+}
+
+.done {
+    text-decoration:line-through;
 }
 
 // Links
@@ -229,10 +251,14 @@
                 h3{
                     margin-top: .5em;
                     color: $colorText;
+
+                    transition: all 0.2s ease;
                 }
 
                 span{
                     color: white;
+
+                    transition: all 0.2s ease;
                 }
             }
 

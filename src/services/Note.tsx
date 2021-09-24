@@ -14,6 +14,15 @@ export const addNote = async (token: string, note: ICreateNote, user: string): P
     }
 }
 
+export const markAsDone = async (token: string, note: string): Promise<any> => {
+    try{
+        const response = await axios.put(`api/note/done/${note}`, {}, {headers: {'x-token': token}});
+        return response.data;
+    } catch (err: any){
+        throw err.response.data;
+    }
+}
+
 export const updateNote = async (token: string, note: IUpdateNote): Promise<any> => {
     const { _id, title, content } = note;
     try{
