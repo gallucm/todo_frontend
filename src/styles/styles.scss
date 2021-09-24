@@ -114,7 +114,11 @@
 }
 
 
-
+.note-update-date{
+    color: #cccc !important;
+    font-style: italic;
+    font-size: small;
+}
 
 // Navbar
 #navbar{
@@ -232,9 +236,7 @@
                 }
             }
 
-            .note-button{
-                margin-left: 2em;
-            }
+            
         }
     }
 
