@@ -3,6 +3,7 @@ import { UiAction } from "../types/Ui";
 
 const initialState: UiState = {
     loading : false,
+    edit: false,
     message: null,
     error: null,
 }
@@ -39,7 +40,11 @@ export const uiReducer = (state: UiState = initialState, action: UiAction): UiSt
                 ...state,
                 error: null
             }
-        
+        case 'EDIT':
+            return {
+                ...state,
+                edit: !state.edit,
+            }
         default:
             return state;
     }

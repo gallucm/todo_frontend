@@ -87,39 +87,19 @@ export const startMarkDone = (note: string) => {
     }
 }
 
-// export const startRemoveNoteSelected = (noteId: string) => {
-//     return async (dispatch: any) => {
-//         dispatch(startLoading());
-
-//         dispatch(removeSelected(noteId));
-
-//         dispatch(stopLoading());
-//     }
-// }
-
-export const startDeleteNote = (notes: Note[]) => {
+export const startDeleteNote = (note: string) => {
     return async (dispatch: any) => {
         try {
             dispatch(startLoading());
             const token = getToken();
-            deletetNotes(dispatch, token, notes)
-            dispatch(removeAllSelected());
+            await deleteNote(token, note);
+            dispatch(setDeleteNote(note));
+            // dispatch(removeAllSelected());
         } catch (error) {
             dispatch(setError('Error al eliminar la nota'));
         } finally {
             dispatch(stopLoading());
         }
-    }
-}
-
-const deletetNotes = async (dispatch: any, token: string, notes: Note[]) => {
-    try{
-        for (let i = 0; i < notes.length; i++) {
-            await deleteNote(token, notes[i]._id + '');
-            dispatch(setDeleteNote(notes[i]._id + ''));
-        }  
-    } catch (error){
-        throw error;
     }
 }
 
@@ -140,10 +120,6 @@ const addSelected = (payload: Note) => ({
 
 const removeSelected = () => ({
     type: 'NOTE_REMOVE_SELECTED'
-});
-
-const removeAllSelected = () => ({
-    type: 'NOTE_REMOVE_ALL_SELECTED'
 });
 
 const setDeleteNote = (payload: string) => ({

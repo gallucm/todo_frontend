@@ -27,4 +27,8 @@ export const removeError = () => ({
 
 export const stopChecking = () => ({
     type: 'CHECKING_STOP'
-})
+});
+
+export const edit = () => ({
+    type: 'EDIT'
+});
