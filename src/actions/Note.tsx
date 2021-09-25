@@ -1,7 +1,6 @@
 import { ICreateNote, IUpdateNote, Note } from "../interfaces/Note";
-import { addNote, deleteNote, getAllNotes, updateNote } from "../services/Note";
+import { addNote, deleteNote, getAllNotes, markAsDone, updateNote } from "../services/Note";
 import { setError, startLoading, stopLoading } from "./Ui";
-
 
 export const startSaveNote = (note: ICreateNote, userId: string) => {
     return async (dispatch: any) => {
@@ -41,11 +40,10 @@ export const startUpdateNote = (note: IUpdateNote) => {
 export const startGetNotes = (userId: string) => {
     return async (dispatch: any) => {
         try {
-            dispatch(startLoading());
-
             dispatch(resetCreateOrUpdate());
-            
-            dispatch(removeAllSelected());
+            dispatch(removeSelected());
+
+            dispatch(startLoading());
 
             const token = getToken();
             const notes = await getAllNotes(token, userId);
@@ -70,39 +68,38 @@ export const startNoteSelected = (note: Note) => {
     }
 }
 
-export const startRemoveNoteSelected = (noteId: string) => {
-    return async (dispatch: any) => {
-        dispatch(startLoading());
-
-        dispatch(removeSelected(noteId));
-
-        dispatch(stopLoading());
-    }
-}
-
-export const startDeleteNote = (notes: Note[]) => {
+export const startMarkDone = (note: string) => {
     return async (dispatch: any) => {
         try {
             dispatch(startLoading());
+
             const token = getToken();
-            deletetNotes(dispatch, token, notes)
-            dispatch(removeAllSelected());
+            const { updated } = await markAsDone(token, note);
+
+            if (updated) {
+                dispatch(setDone(note));
+            }
         } catch (error) {
-            dispatch(setError('Error al eliminar la nota'));
+            dispatch(setError('Error al actualizar la nota'));
         } finally {
             dispatch(stopLoading());
         }
     }
 }
 
-const deletetNotes = async (dispatch: any, token: string, notes: Note[]) => {
-    try{
-        for (let i = 0; i < notes.length; i++) {
-            await deleteNote(token, notes[i]._id + '');
-            dispatch(setDeleteNote(notes[i]._id + ''));
-        }  
-    } catch (error){
-        throw error;
+export const startDeleteNote = (note: string) => {
+    return async (dispatch: any) => {
+        try {
+            dispatch(startLoading());
+            const token = getToken();
+            await deleteNote(token, note);
+            dispatch(setDeleteNote(note));
+            // dispatch(removeAllSelected());
+        } catch (error) {
+            dispatch(setError('Error al eliminar la nota'));
+        } finally {
+            dispatch(stopLoading());
+        }
     }
 }
 
@@ -121,13 +118,8 @@ const addSelected = (payload: Note) => ({
     payload
 });
 
-const removeSelected = (payload: string) => ({
-    type: 'NOTE_REMOVE_SELECTED',
-    payload
-});
-
-const removeAllSelected = () => ({
-    type: 'NOTE_REMOVE_ALL_SELECTED'
+const removeSelected = () => ({
+    type: 'NOTE_REMOVE_SELECTED'
 });
 
 const setDeleteNote = (payload: string) => ({
@@ -141,6 +133,11 @@ const createOrUpdate = () => ({
 
 const resetCreateOrUpdate = () => ({
     type: 'NOTE_CREATE_OR_UPDATE_RESET'
+});
+
+const setDone = (payload: string) => ({
+    type: 'NOTE_SET_DONE_OR_NOT',
+    payload
 });
 
 const getToken = () => {

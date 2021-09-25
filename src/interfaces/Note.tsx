@@ -1,6 +1,6 @@
 export interface NoteState {
     notes: Note[] | [];
-    selected: Note[] | [];
+    selected: Note | null;
     createOrUpdate: boolean;
 }
 

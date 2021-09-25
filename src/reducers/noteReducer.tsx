@@ -3,7 +3,7 @@ import { NoteAction } from "../types/Note";
 
 const initialState: NoteState = {
     notes: [],
-    selected: [],
+    selected: null,
     createOrUpdate: false
 }
 
@@ -29,12 +29,27 @@ export const noteReducer = (state: NoteState = initialState, action: NoteAction)
         case 'NOTE_ADD_SELECTED':
             return {
                 ...state,
-                selected: [...state.selected, action.payload]
+                selected: action.payload
             }
         case 'NOTE_REMOVE_SELECTED':
             return {
                 ...state,
-                selected: state.selected.filter(note => note._id !== action.payload)
+                selected: null
+            }
+
+        case 'NOTE_SET_DONE_OR_NOT':
+            return {
+                ...state,
+                notes: state.notes.map(note => {
+                    if (note._id === action.payload) {
+                        return {
+                            ...note,
+                            done: !note.done
+                        }
+                    }else {
+                        return note
+                    }
+                })
             }
         case 'NOTE_UPDATE':
             return {
@@ -44,19 +59,12 @@ export const noteReducer = (state: NoteState = initialState, action: NoteAction)
                         return {
                             ...note,
                             title: action.payload.title,
-                            content: action.payload.content,
-                            updatedAt: action.payload.updatedAt
-
+                            content: action.payload.content
                         }
                     } else {
                         return note
                     }
                 })
-            }
-        case 'NOTE_REMOVE_ALL_SELECTED':
-            return {
-                ...state,
-                selected: []
             }
 
         case 'NOTE_CREATE_OR_UPDATE':

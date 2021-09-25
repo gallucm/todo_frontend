@@ -13,8 +13,8 @@ export const New = ({ edit = false }) => {
     const { selected, createOrUpdate } = useSelector((state: RootState) => state.note);
     const { user } = useSelector((state: RootState) => state.auth);
 
-    const [title, setTitle] = useState(edit && selected[0]  ? selected[0].title : '');
-    const [content, setContent] = useState(edit && selected[0] ? selected[0].content : '');
+    const [title, setTitle] = useState(edit && selected  ? selected.title : '');
+    const [content, setContent] = useState(edit && selected ? selected.content : '');
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -23,7 +23,7 @@ export const New = ({ edit = false }) => {
 
     const handleUpdate = (e: any) => {
         e.preventDefault();
-        dispatch(startUpdateNote({_id: selected[0]._id + '', title, content, updatedAt: null}));
+        dispatch(startUpdateNote({_id: (selected ? selected._id + '' : ''), title, content, updatedAt: null}));
     }
 
     if (createOrUpdate) {

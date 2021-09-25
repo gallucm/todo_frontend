@@ -25,8 +25,39 @@
     }
 }
 
+.btn-select{
+    border: 1px solid $colorApp;
+    color: $colorApp;
+    
+    width: auto;
+
+    transition: all 0.2s ease;
+
+    &:hover{
+        color: $colorText;
+        background: $colorApp;
+    }
+}
+
 .pointer{
     cursor: pointer;
+}
+
+.blocked{
+    cursor: not-allowed;
+    background: lighten($color: $colorApp, $amount: 20) !important;
+}
+
+.alert-no-notes{
+    border: none;
+    background: $colorText;
+    color: $colorApp;
+    width: 300px;
+    margin: auto;
+}
+
+.done {
+    text-decoration:line-through;
 }
 
 // Links
@@ -204,8 +235,52 @@
     }
 
     #notes{
-        height: auto;
-        max-height: 400px;
+        max-height: 660px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+        .new-note{
+            width: 300px;
+            height: 350px;
+
+            .note-title{
+                color: $colorApp;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid $colorApp;
+                width: 80%;
+                margin: auto;
+                margin-bottom: 10px;
+                text-align: center !important;
+            }
+            
+            .note-body{
+                border-radius: 5px;
+                background: rgb(243, 225, 255);
+                height: 80%;
+
+                .note-content{
+                    color: lighten($color: $colorApp, $amount: 5);
+                    font-style: italic;
+                    margin: auto;
+                    width: 80%;
+                    height: 60%
+                }
+
+                span{
+                    height: 20px;
+                    overflow-y: auto;
+                    border: 1px solid red;
+                    
+                }
+            }
+
+            .note-buttons{
+                text-align: center;
+            }
+        }
 
         .note{
             display: flex;
@@ -229,14 +304,16 @@
                 h3{
                     margin-top: .5em;
                     color: $colorText;
+
+                    transition: all 0.2s ease;
                 }
 
                 span{
                     color: white;
+
+                    transition: all 0.2s ease;
                 }
             }
-
-            
         }
     }
 
@@ -247,4 +324,5 @@
         bottom:0;
     }
 
+    
 }
