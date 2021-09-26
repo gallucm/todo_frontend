@@ -16,8 +16,8 @@ npm install
 ```
 ## Configuración
 1. Crear archivo .env.local en la raíz del proyecto y agregar las siguientes variables de entorno:
-  - REACT_APP_SERVER_BACKEND: (url del backend)
-  - REACT_APP_JWTPRIVATEKEY: (llave para tokens)
+  - REACT_APP_SERVER_BACKEND = (url del backend)
+  - REACT_APP_JWTPRIVATEKEY = (llave para tokens)
   
 2. Iniciar la aplicación con el siguiente comando:
 ```bash
