@@ -7,6 +7,7 @@ import { Navbar } from "./ui/Navbar"
 export const HomeScreen = () => {
 
     const { notes } = useSelector((state: RootState) => state.note);
+    const { loading } = useSelector((state: RootState) => state.ui);
     
 
     return (
@@ -15,7 +16,7 @@ export const HomeScreen = () => {
             <Notes />
             
             {
-                (notes && notes.length > 0) &&
+                (!loading && notes.length > 0) &&
                 <div className="notes-cant">
                     <span>Notas: <strong>{notes.length}</strong></span>
                 </div>
