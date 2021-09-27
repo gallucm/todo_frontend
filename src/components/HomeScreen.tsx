@@ -7,13 +7,15 @@ import { Navbar } from "./ui/Navbar"
 export const HomeScreen = () => {
 
     const { notes } = useSelector((state: RootState) => state.note);
+    
 
     return (
         <>
             <Navbar />
             <Notes />
+            
             {
-                notes.length > 0 &&
+                (notes && notes.length > 0) &&
                 <div className="notes-cant">
                     <span>Notas: <strong>{notes.length}</strong></span>
                 </div>
