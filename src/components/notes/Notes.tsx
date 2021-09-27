@@ -27,7 +27,7 @@ export const Notes = () => {
                     loading &&
                     <LoadingBig />
                 }
-                {(notes.length === 0) &&
+                {(notes.length === 0 && !loading) &&
                     <div className="alert alert-light alert-no-notes" role="alert">
                         <span>No hay ninguna nota para mostrar.</span>
                         <br />
