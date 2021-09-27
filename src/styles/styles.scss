@@ -39,6 +39,8 @@
     }
 }
 
+
+
 .pointer{
     cursor: pointer;
 }
@@ -54,6 +56,13 @@
     color: $colorApp;
     width: 300px;
     margin: auto;
+}
+
+.separator{
+    border: 1px solid $colorText;
+    width: 80%;
+    margin: auto;
+    margin-top: 3em;
 }
 
 .done {
@@ -112,11 +121,6 @@
     }
 }
 
-.note-content{
-    height: 8em;
-    resize: none;
-}
-
 .alert-success{
     width: 20em;
     margin: auto;
@@ -125,6 +129,10 @@
 .alert-todo{
     width: 19em;
     margin: auto;
+}
+
+.buttons{
+    margin-bottom: .5em;
 }
 
 // Logo
@@ -145,11 +153,7 @@
 }
 
 
-.note-update-date{
-    color: #cccc !important;
-    font-style: italic;
-    font-size: small;
-}
+
 
 // Navbar
 #navbar{
@@ -187,17 +191,73 @@
     }
 }
 
+.notes-cant{
+    text-align: right;
+    color: $colorText;
+    font-style: italic;
+    font-weight: 200;
+
+    width: 75%;
+    margin: auto;
+}
+
+.note-new{
+    border-radius: 5px;
+    background: rgb(243, 225, 255);
+    
+    margin: auto;
+    
+    width: 300px;
+    height: 300px;
+
+    .note-new-title{
+        background: transparent;
+        border: none;
+        border-radius: 0%;
+        border-bottom: 2px solid $colorApp;
+        margin: auto;
+        padding-top: 1em;
+        width: 80%;
+        font-size: medium;
+        text-align: center;
+
+        color: $colorApp;
+        
+    }
+
+    .note-new-content{
+        background: transparent;
+        border: none;
+        border-radius: 0%;
+        height: 185px;
+        resize: none;
+        width: 80%;
+        margin: auto;
+        margin-top: .5em;
+        text-align: center;
+
+        font-weight: medium;
+
+        color: lighten($color: $colorApp, $amount: 10);
+
+        font-style: italic;
+
+        border-bottom: 2px solid $colorApp;
+
+        overflow-y: auto;
+
+    }
+}
+
 // Content
-#content{
-    height: 100%;
+.content{
     overflow-y: scroll;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5em;
+    margin-top: 1.5em;
     text-align: center;
     position: relative;
-
 
     .content-auth{
         background: white;
@@ -235,15 +295,21 @@
     }
 
     #notes{
-        max-height: 350px;
-
+        height: 650px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
 
-        .new-note{
+        .note{
             width: 300px;
-            height: 350px;
+            height: 290px;
+            margin-bottom: 3em;
+
+            .note-update-date{
+                color: lighten($color: $colorApp, $amount: 15);
+                font-style: italic;
+                font-size: small;
+            }
 
             .note-title{
                 color: $colorApp;
@@ -259,21 +325,20 @@
             .note-body{
                 border-radius: 5px;
                 background: rgb(243, 225, 255);
-                height: 80%;
+                height: 300px;
 
                 .note-content{
-                    color: lighten($color: $colorApp, $amount: 5);
+                    color: lighten($color: $colorApp, $amount: 10);
                     font-style: italic;
                     margin: auto;
-                    width: 80%;
-                    height: 60%
+                    width: 75%;
+                    height: 185px;
+                    overflow-y: auto;
                 }
 
                 span{
                     height: 20px;
                     overflow-y: auto;
-                    border: 1px solid red;
-                    
                 }
             }
 
@@ -281,48 +346,13 @@
                 text-align: center;
             }
         }
+    }
+}
 
-        .note{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 90%;
-            height: 7em;
-            overflow-y: scroll;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 1.5em;
-            border-bottom: .5px solid $colorText;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
-
-            .note-content{
-                flex: 1 1 auto;
-
-                h3{
-                    margin-top: .5em;
-                    color: $colorText;
-
-                    transition: all 0.2s ease;
-                }
-
-                span{
-                    color: white;
-
-                    transition: all 0.2s ease;
-                }
-            }
+@media screen and (max-width: 500px){
+    .content{
+        #notes{
+            height: 320px;
         }
     }
-
-    .buttons{
-        border: 1px solid red !important;
-        color: red;
-        position: relative;
-        bottom:0;
-    }
-
-    
 }

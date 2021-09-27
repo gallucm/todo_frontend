@@ -12,13 +12,13 @@ export const Notes = () => {
 
     return (
         <>
-            <div id="content">
+            <div className="content">
                 {(notes.length === 0) &&
                     <div className="alert alert-light alert-no-notes" role="alert">
                         <span>No hay ninguna nota para mostrar.</span>
                         <br />
                         <Link to="/new" className="btn btn-select shadow-none mt-2">
-                            Agregar
+                            Nueva
                         </Link>
                     </div>
                 }
