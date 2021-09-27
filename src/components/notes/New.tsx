@@ -32,8 +32,8 @@ export const New = ({ edit = false }) => {
     return (
         <div className="content">
             <form className="note-new" onSubmit={edit ? handleUpdate : handleSubmit}>
-                <input type="text" className="form-control shadow-none note-new-title" name="title" value={title} onChange={(e) => { setTitle(e.target.value) }} placeholder="Title" required />
-                <textarea className="form-control shadow-none note-new-content" name="content" value={content} onChange={(e) => { setContent(e.target.value) }} placeholder="Contenido" required></textarea>
+                <input type="text" className="form-control shadow-none note-new-title" name="title" value={title} onChange={(e) => { setTitle(e.target.value) }} placeholder="Título" required autoComplete="off" />
+                <textarea className="form-control shadow-none note-new-content" name="content" value={content} onChange={(e) => { setContent(e.target.value) }} placeholder="Contenido" required autoComplete="off"></textarea>
                 <div className="note-buttons text-center">
                     <button type="submit" className="btn btn-select" title="Guardar">
                         <i className="fas fa-save"></i>

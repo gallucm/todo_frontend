@@ -22,7 +22,7 @@ export const LoginScreen = () => {
     }
 
     return (
-        <>
+        <div className="center">
             <div className="content">
                 <form className="content-auth" onSubmit={handleLogin}>
                     <div className="logo-auth">
@@ -44,6 +44,6 @@ export const LoginScreen = () => {
                 </form>
                 <AlertError/>
             </div>
-        </>
+        </div>
     )
 }
