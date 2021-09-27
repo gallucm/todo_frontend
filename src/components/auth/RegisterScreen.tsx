@@ -38,7 +38,7 @@ export const RegisterScreen = () => {
 
     return (
         <>
-            <div id="content">
+            <div className="content">
                 <form className="content-auth" onSubmit={handleRegister}>
                     <div className="logo-auth">
                         <h1>ToDoAPP</h1>

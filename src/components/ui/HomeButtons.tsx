@@ -6,7 +6,7 @@ export const HomeButtons = () => {
         <>
             <div className="fixed-bottom buttons text-center">
                 <Link to="/new" className="btn btn-app shadow-none">
-                    <i className="fas fa-plus"></i>
+                    <i className="fas fa-plus "></i>
                 </Link>
             </div>
         </>

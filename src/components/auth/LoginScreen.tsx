@@ -23,7 +23,7 @@ export const LoginScreen = () => {
 
     return (
         <>
-            <div id="content">
+            <div className="content">
                 <form className="content-auth" onSubmit={handleLogin}>
                     <div className="logo-auth">
                         <h1>ToDoAPP</h1>
