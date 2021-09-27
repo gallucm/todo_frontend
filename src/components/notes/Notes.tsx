@@ -16,16 +16,16 @@ export const Notes = () => {
         <>
             <div className="content">
                 {
+                    loading &&
+                    <LoadingBig />
+                }
+                {
                     (notes && notes.length > 0) &&
                     <div id="notes">
                         {notes.map((note, idx) => (
                             <NewNoteContent note={note} key={idx} />
                             ))}
                     </div>
-                }
-                {
-                    loading &&
-                    <LoadingBig />
                 }
                 {(notes.length === 0 && !loading) &&
                     <div className="alert alert-light alert-no-notes" role="alert">
