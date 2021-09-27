@@ -39,6 +39,13 @@
     }
 }
 
+.loading-big{
+    color: $colorText;
+    width: 5em;
+    height: 5em;
+    margin-top: 5em;
+}
+
 .pointer{
     cursor: pointer;
 }
@@ -293,7 +300,7 @@
     }
 
     #notes{
-        height: 650px;
+        height: 660px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
