@@ -20,7 +20,7 @@ export const Notes = () => {
                     <LoadingBig />
                 }
                 {
-                    (notes && notes.length > 0) &&
+                    (!loading && notes.length > 0) &&
                     <div id="notes">
                         {notes.map((note, idx) => (
                             <NewNoteContent note={note} key={idx} />
