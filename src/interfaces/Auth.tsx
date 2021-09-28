@@ -18,6 +18,11 @@ export interface UserRegister {
     password2: string;
 }
 
+export interface IUserUpdate {
+    username: string
+    email: string;
+}
+
 export interface UserLogin {
     email: string;
     password: string;

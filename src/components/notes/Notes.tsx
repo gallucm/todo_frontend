@@ -28,10 +28,10 @@ export const Notes = () => {
                     </div>
                 }
                 {(notes.length === 0 && !loading) &&
-                    <div className="alert alert-light alert-no-notes" role="alert">
+                    <div className="alert alert-light alert-no-notes mt-4" role="alert">
                         <span>No hay ninguna nota para mostrar.</span>
                         <br />
-                        <Link to="/new" className="btn btn-select shadow-none mt-2">
+                        <Link to="/new" className="btn btn-select shadow-none mt-3">
                             Nueva
                         </Link>
                     </div>

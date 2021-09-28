@@ -1,6 +1,6 @@
 import { checkToken } from "../helpers/jwt";
-import { UserLogin, UserRegister } from "../interfaces/Auth";
-import { login, register } from "../services/User";
+import { IUserUpdate, UserLogin, UserRegister } from "../interfaces/Auth";
+import { login, register, update } from "../services/User";
 import { setError, setMessage, startLoading, stopLoading } from "./Ui";
 
 
@@ -48,6 +48,24 @@ export const startRegister = (userRegister: UserRegister) => {
             else
                 dispatch(setError('Error al registrar usuario'));
         } finally {
+            dispatch(stopLoading());
+        }
+    }
+}
+
+export const startUpdate = (id: string, user: IUserUpdate) => {
+    return async (dispatch: any) => {
+        try {
+            dispatch(startLoading());
+            const { token } = await update(id, user);
+
+            if (token){
+                setSession(token);
+                dispatch(startCheck());
+            }
+        } catch (error: any) {
+            dispatch(setError('Error al actualizar usuario'));
+        } finally{
             dispatch(stopLoading());
         }
     }

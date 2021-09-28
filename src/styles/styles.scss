@@ -354,6 +354,47 @@
     }
 }
 
+#profile{
+    width: 80%;
+    margin: auto;
+    margin-top: 3em;
+
+    .profile-input{
+        width: 250px;
+        height: 50px;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 1em;
+
+        color: lighten($color: $colorApp, $amount: 10);
+    }
+
+    #profile-option{
+
+        text-align: center;
+        width: 250px;
+        height: auto;
+        padding: .5em;
+        margin: auto;
+        border-bottom: 2px solid $colorText;
+        
+        span{
+            margin: 1.5em;
+            font-style: italic;
+            font-weight: 600;
+            color: $colorText;
+            cursor: pointer;
+
+            &:hover{
+                color: darken($color: $colorText, $amount: 20);
+            }
+        }
+
+    }
+
+
+}
+
 @media screen and (max-width: 500px){
     .content{
         #notes{
