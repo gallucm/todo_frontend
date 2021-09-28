@@ -1,9 +1,6 @@
 # Aplicación: ToDo App
 Aplicación creada en React que permite crear notas o cosas por hacer.
 
-## Demo
-Si queres visualizar una demo de este proyecto, podes visitar [Demo](https://todo-app-cmg.netlify.app)
-
 ## Como utilizar
 1. Clonar proyecto
 ```bash
