@@ -1,4 +1,4 @@
-import { UserLogin, UserRegister } from "../interfaces/Auth";
+import { IUserUpdate, UserLogin, UserRegister } from "../interfaces/Auth";
 
 const axios = require('axios');
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_BACKEND;
@@ -37,5 +37,15 @@ export const isLoggedIn = async (): Promise<any> => {
         }
     } else {
         return null;
+    }
+}
+
+export const update = async (id: string, user: IUserUpdate): Promise<any> => {
+    try{
+        const { username, email } = user;
+        const response = await axios.put(`api/user/${id}`, {username, email});
+        return response.data;
+    } catch (err: any){
+        throw err.response.data;
     }
 }
