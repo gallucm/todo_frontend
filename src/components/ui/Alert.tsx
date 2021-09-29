@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { removeCreated } from '../../actions/Auth';
 import { removeMessage } from '../../actions/Ui';
 import { RootState } from '../../store/store';
 
@@ -12,7 +11,6 @@ export const Alert = () => {
     const handleResetMessage = (e: any) => {
         e.preventDefault();
         dispatch(removeMessage());
-        dispatch(removeCreated());
     }
 
     return (

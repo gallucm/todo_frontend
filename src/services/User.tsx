@@ -49,3 +49,12 @@ export const update = async (id: string, user: IUserUpdate): Promise<any> => {
         throw err.response.data;
     }
 }
+
+export const updatePassword = async (id: string, password: string, newPassword: string): Promise<any> => {
+    try{
+        const response = await axios.put(`api/user/password/${id}`, {password, newPassword});
+        return response.data;
+    } catch (err: any){
+        throw err.response.data;
+    }
+}
