@@ -1,6 +1,6 @@
 import { checkToken } from "../helpers/jwt";
 import { IUserUpdate, UserLogin, UserRegister } from "../interfaces/Auth";
-import { login, register, update } from "../services/User";
+import { login, register, update, updatePassword } from "../services/User";
 import { setError, setMessage, startLoading, stopLoading } from "./Ui";
 
 
@@ -65,6 +65,24 @@ export const startUpdate = (id: string, user: IUserUpdate) => {
             }
         } catch (error: any) {
             dispatch(setError('Error al actualizar usuario'));
+        } finally{
+            dispatch(stopLoading());
+        }
+    }
+}
+
+export const startUpdatePassword = (userId: string, password: string, newPassword: string) => {
+    return async (dispatch: any) => {
+        try {
+            dispatch(startLoading());
+            await updatePassword(userId, password, newPassword);
+            dispatch(setMessage('Contraseña actualizada correctamente'));
+            
+        } catch (error: any) {
+            if (error.code === 403)
+                dispatch(setError('La contraseña actual es incorrecta'));
+            else 
+                dispatch(setError('Error al actualizar la contraseña'));
         } finally{
             dispatch(stopLoading());
         }
